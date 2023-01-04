@@ -1,0 +1,121 @@
+pip install mysql-connector-python
+
+import mysql.connector
+con=mysql.connector.connect(
+    host ='localhost', username='root',password='cdac',database='library'
+)
+
+
+def addbook():
+    bn=input("Enter Book name: ")
+    c=input("Book Code: ")
+    t=input("Total Book: ")
+    s=input("Enter Subject: ")
+    data=(bn,c,t,s)
+    sql="insert into books values(%s%s%s%s)"
+    c=con.cursor()
+    c.execute(sql,data)
+    con.commit()
+    print("--------------------------------------------------")
+    print*("Data Entered Successfully")
+    main()
+
+def issuebook():
+    n=input("Enter name: ")
+    r=input("Book Regno: ")
+    co=input("Enter Book Code: ")
+    d=input("Enter Date: ")
+    data=(n,r,co,d)
+    a="insert into issue values(%s%s%s%s)"
+    c=con.cursor()
+    c.execute(a,data)
+    con.commit()
+    print("--------------------------------------------------")
+    print("Book issued to: ",n)   
+    bookup(co,-1) 
+    
+
+def submitbook():
+    n=input("Enter name: ")
+    r=input("Book Regno: ")
+    co=input("Enter Book Code: ")
+    d=input("Enter Date: ")
+    data=(n,r,co,d)
+    a="insert into issue values(%s%s%s%s)"
+    c=con.cursor()
+    c.execute(a,data)
+    con.commit()
+    print("--------------------------------------------------")
+    print("Book isubmitted from: ",n)   
+    bookup(co,1) 
+    
+    
+def bookup(co,u):
+    a="Select TOTAL from books where BCODE=%s"
+    data=(co,)
+    c=con.cursor()
+    c.execute(a,data)
+    myresult=c.fetchone()
+    t=myresult[0]+u
+    sql="update books set TOTAL=%s where BCODE=%s"
+    d=(t,co)
+    c.execute(sql,d)
+    con.commit()
+    main()
+    
+def deletebook():
+    ac=input("Enter Book Code: ")
+    a="delete from books where BCODE=%s"
+    d=(ac,)
+    c=con.cursor()
+    c.execute(a,ac)
+    con.commit()
+    main()
+
+def displaybook():
+    s="Select * from book"
+    c=con.cursor()
+    c.execute(a)
+    result=c.fetchall()
+    for i in result:
+        print("Book Name",i[0])
+        print("Book Code",i[1])
+        print("Total",i[2])
+        print('--------------------------------')
+        main()
+    
+def main():
+    print('''                Library
+    1.Add Book
+    2.Issue Book
+    3.Submit Book
+    4.Delete Book
+    5.Display book
+    Enter your choice'''
+    )
+    n=int(input())
+    if n==1:
+        addbook()
+    elif n==2:
+        issuebook()
+    elif n==3:
+        submitbook()
+    elif n==4:
+        delbook()
+    elif n==5:
+        displaybook()
+    else:
+        print("Wrong input")
+        main()
+def pswd():
+    
+    a=input("Enter Your Password ")
+    if a=='Gaurav1405':
+         main()
+    else:
+        print("Wrong Password Enter again")
+        pswd()
+    
+
+
+pswd()
