@@ -1,0 +1,85 @@
+
+
+d={}
+class Bank():
+  count=2022100
+  #d={}
+  def __init__(self,name,amt):
+    
+    self.Name=name       
+    self.Amount=amt       
+    Bank.count+=1
+    self.acn=Bank.count
+    d[self.acn]=[self.Name,self.Amount]
+    #print(d)
+
+    print("Congratulations Your Account has been created in leena Bank!!\nName:", self.Name, "\nDeposit amount:", self.Amount,"\nAccount No:",self.acn)
+
+    
+      
+  def display(self):
+      x=int(input("Enter  Account Number:"))
+      if x in d :
+        print("Your Balance is :Rs",d[x][1])
+      else:
+        print("Invalid Account Number")           
+
+  def Withdrawl(self):
+      x=int(input("Enter  Account Number: "))
+      if x in d :
+        y=int(input("Enter Amount:Rs "))
+        if y <= d[x][1]:
+          if (d[x][1] - y) >=1000: 
+              d[x][1]=d[x][1]-y
+              print("Balance is:Rs",d[x][1])
+          else:
+             print("Not Sufficient  Balance")
+        else:
+            print("Not Sufficient  Balance")
+      else:
+        print("Invalid Account Number")   
+
+  def Deposit(self):
+      l=int(input("Enter  Account Number: "))
+      if l in d :
+        w=int(input("Enter Amount: "))
+        if w > 0 :
+          d[l][1]=d[l][1]+w
+          print("Remaining Balance is: ",d[l][1])
+        else:
+          print("Invalid input")
+      else:
+        print("Invalid Account Number")
+
+  def info(self):
+      x=int(input("Enter  Account Number:"))
+      if x in d :
+        print("Name:",d[x][0],"\n Account No:",x,"\nYour Balance is :Rs",d[x][1])
+      else:
+        print("Invalid Account Number") 
+
+
+  
+while True:
+    print("\n1.Create Account \n2.Withdraw \n3.Deposit amount \n4.Check Balance \n5.Check Account Information \n6.Cancel ")
+    x=int(input("Enter your Choice: "))
+    if x == 6:
+      break       
+    if x==1:
+      name=input("Enter your name: ")
+      amt=int(input("Deposit minimum Rs 1000 to open account you have deposited only:Rs "))
+      if amt>=1000:
+        c=Bank(name,amt)
+      else:
+        ("Minimum Rs 1000 Required for accont opening")          
+    elif x==2:
+      c.Withdrawl()
+    elif x==3:
+      c.Deposit()
+    elif x==4:
+      c.display()
+    elif x==5:
+      c.info()  
+  
+    else:
+      print("Invalid Input")
