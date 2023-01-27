@@ -1,0 +1,23 @@
+def armstrong(number,count):
+    y=number
+    cc=0
+    b=0
+    while y>0:
+
+        b=y%10
+        cc+=b**3
+        y=y//10
+    return cc
+
+
+
+a=int(input("Enter Number"))
+count=0
+for i in str(a):
+  count+=1
+c=armstrong(a,count)
+
+if c==a:
+  print('armstrong',a)
+else:
+  print('not armstrong',a)
