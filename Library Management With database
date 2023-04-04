@@ -12,12 +12,12 @@ def addbook():
     t=input("Total Book: ")
     s=input("Enter Subject: ")
     data=(bn,c,t,s)
-    sql="insert into books values(%s%s%s%s)"
+    sql="insert into books values(%s, %s, %s, %s)"
     c=con.cursor()
     c.execute(sql,data)
     con.commit()
     print("--------------------------------------------------")
-    print*("Data Entered Successfully")
+    print("Data Entered Successfully")
     main()
 
 def issuebook():
@@ -26,7 +26,7 @@ def issuebook():
     co=input("Enter Book Code: ")
     d=input("Enter Date: ")
     data=(n,r,co,d)
-    a="insert into issue values(%s%s%s%s)"
+    a="insert into issue values(%s, %s, %s, %s)"
     c=con.cursor()
     c.execute(a,data)
     con.commit()
@@ -41,7 +41,7 @@ def submitbook():
     co=input("Enter Book Code: ")
     d=input("Enter Date: ")
     data=(n,r,co,d)
-    a="insert into issue values(%s%s%s%s)"
+    a="insert into issue values(%s, %s, %s, %s)"
     c=con.cursor()
     c.execute(a,data)
     con.commit()
@@ -73,9 +73,9 @@ def deletebook():
     main()
 
 def displaybook():
-    s="Select * from book"
+    s="Select * from books"
     c=con.cursor()
-    c.execute(a)
+    c.execute(s )
     result=c.fetchall()
     for i in result:
         print("Book Name",i[0])
